@@ -11,7 +11,18 @@ let tweets = [];
 app.post("/sign-up", (req,res) =>{
     let newUser = req.body;
     users.push(newUser);
-    res.send(users);
+    res.send("OK");
+});
+
+app.post("/tweets", (req,res) =>{
+    let newTweet = req.body;
+    if(!users.find(check => check.username === newTweet.username)){
+        res.send("UNAUTHORIZED");
+    }
+    else{
+        tweets.push(newTweet);
+        res.send("OK");
+    }
 });
 
 const port = 5000;
