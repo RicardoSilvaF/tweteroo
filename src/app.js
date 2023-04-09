@@ -25,5 +25,14 @@ app.post("/tweets", (req,res) =>{
     }
 });
 
+app.get("/tweets", (req,res) => {
+    let lastTweets = tweets.slice(-10);
+    for(let i = 0; i<lastTweets.length ; i++){
+        let loadAvatar = users.find(check => check.username === lastTweets[i].username).avatar;
+        lastTweets[i].avatar = loadAvatar;
+    }
+    res.send(lastTweets);
+});
+
 const port = 5000;
 app.listen(port);
